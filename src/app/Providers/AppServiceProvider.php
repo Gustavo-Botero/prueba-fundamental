@@ -11,7 +11,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Register Repositories
+        $this->app->bind(
+            \App\Repositories\Contracts\UserRepositoryInterface::class,
+            \App\Repositories\Modules\UserRepository::class
+        );
+
+        // Register UseCases
+        $this->app->bind(
+            \App\UseCases\Contracts\Auth\RegisterInterface::class,
+            \App\UseCases\Modules\Auth\RegisterUsecase::class
+        );
+        $this->app->bind(
+            \App\UseCases\Contracts\Auth\LoginInterface::class,
+            \App\UseCases\Modules\Auth\LoginUsecase::class
+        );
     }
 
     /**

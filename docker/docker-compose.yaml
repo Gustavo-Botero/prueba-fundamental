@@ -28,9 +28,9 @@ services:
     container_name: laravel_db
     restart: always
     environment:
-      POSTGRES_USER: laravel
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret
-      POSTGRES_DB: laravel
+      POSTGRES_DB: fundamental
     volumes:
       - dbdata:/var/lib/postgresql/data
     ports:

@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,5 +29,25 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     */
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof ValidationException) {
+            return ValidationExceptionHandler::handle($exception);
+        }
+
+        if ($exception instanceof AuthenticationException) {
+            return AuthenticationExceptionHandler::handle($exception);
+        }
+
+        if ($exception instanceof HttpException) {
+            return HttpExceptionHandler::handle($exception);
+        }
+
+        return parent::render($request, $exception);
     }
 }
