@@ -3,6 +3,7 @@
 namespace App\UseCases\Modules\Auth;
 
 use App\UseCases\Contracts\Auth\LoginInterface;
+use Illuminate\Http\JsonResponse;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class LoginUsecase implements LoginInterface
@@ -11,23 +12,20 @@ class LoginUsecase implements LoginInterface
      * Login a user
      *
      * @param array $credentials
-     * @return array
+     * @return JsonResponse
      */
-    public function handle(array $credentials): array
+    public function handle(array $credentials): JsonResponse
     {
         $token = JWTAuth::attempt($credentials);
-        $response = [
-            'token' => $token,
-            'status' => 200
-        ];
 
         if (!$token) {
-            $response = [
+            return response()->json([
                 'error' => 'Invalid credentials',
-                'status' => 401
-            ];
+            ], 401);
         }
 
-        return $response;
+        return response()->json([
+            'token' => $token,
+        ], 200);
     }
 }

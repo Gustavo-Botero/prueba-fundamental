@@ -26,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
             \App\UseCases\Contracts\Auth\LoginInterface::class,
             \App\UseCases\Modules\Auth\LoginUsecase::class
         );
+
+        $this->app->bind(
+            \App\UseCases\Contracts\Task\CreateTaskInterface::class,
+            \App\UseCases\Modules\Task\CreateTaskUsecases::class
+        );
     }
 
     /**

@@ -34,7 +34,7 @@ class RegisterUsecase implements RegisterInterface
      */
     public function handle(RegisterRequest $request): array
     {
-        $user = $this->userRepository->create($request->all());
+        $user = $this->userRepository->create($request->validated());
 
         $token = JWTAuth::fromUser($user);
 

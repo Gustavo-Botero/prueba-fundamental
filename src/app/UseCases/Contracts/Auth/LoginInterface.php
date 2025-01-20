@@ -2,13 +2,15 @@
 
 namespace App\UseCases\Contracts\Auth;
 
+use Illuminate\Http\JsonResponse;
+
 interface LoginInterface
 {
     /**
      * Login a user
      *
      * @param array $credentials
-     * @return array
+     * @return JsonResponse
      */
-    public function handle(array $credentials): array;
+    public function handle(array $credentials): JsonResponse;
 }
