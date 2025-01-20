@@ -34,6 +34,24 @@ docker exec -i laravel_app composer install
 docker exec -i laravel_app php artisan migrate
 ```
 
+### Datos conexión base de datos
+
+```
+DB_CONNECTION=pgsql
+DB_HOST=db
+DB_PORT=5432
+DB_DATABASE=fundamental
+DB_USERNAME=postgres
+DB_PASSWORD=secret
+```
+
+### Se ejecuta por el puerto 8088
+
+```
+http://localhost:8080
+```
+
+---
 ## **Endpoints de la API**
 A continuación, se detalla la lista de endpoints disponibles junto con ejemplos de cómo consumirlos.
 | **Endpoint**        | **Método** | **Middleware**       | **Descripción**                                               | **Cuerpo de la Petición**                                                                                                                                                 |
