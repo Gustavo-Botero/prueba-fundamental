@@ -21,10 +21,8 @@ WORKDIR /var/www/html
 # Copia los archivos del proyecto Laravel al contenedor
 COPY ./src /var/www/html
 
-# Instala las dependencias de Composer y prepara el entorno de Laravel
-RUN composer install --no-scripts --no-autoloader || true && \
-    composer dump-autoload && \
-    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+# Configura los permisos para las carpetas necesarias
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Limpia archivos temporales para reducir el tamaño de la imagen
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
